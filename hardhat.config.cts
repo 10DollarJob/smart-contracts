@@ -20,35 +20,48 @@ const config: HardhatUserConfig = {
 	},
 	networks: {
 		mainnet: {
-			url: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY!}`,
+			url: `https://mainnet.infura.io/v3/${process.env.ALCHEMLY_KEY!}`,
 			accounts: {
 				mnemonic: mnemnoc,
 			},
+		},
+		mainnetSepolia:{
+			url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMLY_KEY!}`,
+			accounts: {
+				mnemonic: mnemnoc,
+			}
 		},
 		arbitrumOne: {
-			url: `https://arbitrum-mainnet.infura.io/v3/${process.env.INFURA_KEY!}`,
-			accounts: {
-				mnemonic: mnemnoc,
-			},
-		},
-		arbitrumRinkeby: {
-			url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.INFURA_KEY!}`,
+			url: `https://arbitrum-mainnet.infura.io/v3/${process.env.ALCHEMLY_KEY!}`,
 			accounts: {
 				mnemonic: mnemnoc,
 			},
 		},
 		polygonMainnet: {
-			url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_KEY!}`,
+			url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMLY_KEY!}`,
 			accounts: {
 				mnemonic: mnemnoc,
 			},
 		},
-		polygonMumbai: {
-			url: `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_KEY!}`,
+		flowEVMTestNet : {
+			url: `https://flow-testnet.g.alchemy.com/v2/${process.env.ALCHEMLY_KEY!}`,
 			accounts: {
 				mnemonic: mnemnoc,
 			},
 		},
+		// deployed via remix
+		zkSyncSepolia : {
+			url: `https://zksync-sepolia.g.alchemy.com/v2/${process.env.ALCHEMLY_KEY!}`,
+			accounts: {
+				mnemonic: mnemnoc,
+			}
+		},
+		baseSepolia : {
+			url: `https://base-sepolia.g.alchemy.com/v2/${process.env.ALCHEMLY_KEY!}`,
+			accounts : {
+				mnemonic: mnemnoc,
+			}
+		}
 	},
 	etherscan: {
 		apiKey: {
