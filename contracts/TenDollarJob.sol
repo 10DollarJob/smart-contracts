@@ -5,14 +5,7 @@ import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Ini
 
 contract TenDollarJob is Initializable {
 	event CreateAgent(address devPAddress, address agentAddress);
-	// event Deposit(string userId, string agentId, uint256 amount);
-	// event PaymentToMerchant(
-	// 	bytes32 merchantId,
-	// 	bytes32 orderId,
-	// 	bytes32 userId,
-	// 	bytes32 agentId,
-	// 	uint256 amount
-	// );
+	event Deposit(address agentAddress, uint256 amount);
 
 	address public usdcAddress;
 	address public owner;
@@ -50,27 +43,28 @@ contract TenDollarJob is Initializable {
 		address agentAddress
 	) public onlyOwner {
 		require(
-			agentIdToDevAddress[agentAddress] == address(0),
-			"Agent ID already exists"
+			agentAddressToDevAddress[agentAddress] == address(0),
+			"Agent already exists"
 		);
 		agentAddressToDevAddress[agentAddress] = devAddress;
 		devToAgentAddress[devAddress].push(agentAddress);
-		devToAgnetAddressToBalance[devAddress][agentId] = 0;
+		devToAgnetAddressToBalance[devAddress][agentAddress] = 0;
 		emit CreateAgent(devAddress, agentAddress);
 	}
 
 	function deposit(address agentAddress, uint256 amount) public {
 		require(
 			agentAddressToDevAddress[agentAddress] != address(0),
-			"Agent ID does not exist"
+			"Agent does not exist"
 		);
 		require(
 			IERC20(usdcAddress).allowance(msg.sender, address(this)) >= amount,
 			"AgentsManagerWallet: not enough allowance"
 		);
-		address devAddress = agentAgentToDevAddress[agentAddress];
+		address devAddress = agentAddressToDevAddress[agentAddress];
 		IERC20(usdcAddress).transferFrom(msg.sender, address(this), amount);
 		devToAgnetAddressToBalance[devAddress][agentAddress] += amount;
+		emit Deposit(agentAddress, amount);
 	}
 
 	function balanceOfAgent(
