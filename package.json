@@ -16,7 +16,7 @@
 		"clean": "del 'artifacts'",
 		"prepare": "husky install"
 	},
-	"author": "",
+	"author": "shubham",
 	"license": "MPL-2.0",
 	"devDependencies": {
 		"@nomicfoundation/hardhat-chai-matchers": "^2.0.7",
