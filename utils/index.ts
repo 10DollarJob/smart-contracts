@@ -1,4 +1,4 @@
-import {ethers} from 'ethers'
+import { ethers } from 'ethers'
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY
 const ABI = [
 	{
@@ -471,6 +471,6 @@ const provider = new ethers.JsonRpcProvider(
 const contract = new ethers.Contract(contractAddress, ABI, provider)
 
 export const callAgnetContract = async (method: string, args: any[]) => {
-    const result = await contract[method](...args)
-    return result
+	const result = await contract[method](...args)
+	return result
 }

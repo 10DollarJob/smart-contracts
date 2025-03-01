@@ -45,7 +45,10 @@ contract TenDollarJob is Initializable {
 		usdcAddress = _usdcAddress;
 	}
 
-	function createAgent(address devAddress, address agentAddress) public onlyOwner {
+	function createAgent(
+		address devAddress,
+		address agentAddress
+	) public onlyOwner {
 		require(
 			agentIdToDevAddress[agentAddress] == address(0),
 			"Agent ID already exists"
