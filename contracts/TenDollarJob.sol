@@ -38,10 +38,7 @@ contract TenDollarJob is Initializable {
 		usdcAddress = _usdcAddress;
 	}
 
-	function createAgent(
-		address devAddress,
-		address agentAddress
-	) public {
+	function createAgent(address devAddress, address agentAddress) public {
 		require(address(msg.sender) == devAddress, "illegal access");
 		require(
 			agentAddressToDevAddress[agentAddress] == address(0),
@@ -75,8 +72,8 @@ contract TenDollarJob is Initializable {
 		return devToAgnetAddressToBalance[devAddress][agentAddress];
 	}
 
-	function withDrawAgentFunds (address agentAddress) public {
-		uint256 agentBalance =  balanceOfAgent(agentAddress);
+	function withDrawAgentFunds(address agentAddress) public {
+		uint256 agentBalance = balanceOfAgent(agentAddress);
 		require(agentBalance > 0, "No funds to withdraw");
 		address devWalletAddress = agentAddressToDevAddress[agentAddress];
 		devToAgnetAddressToBalance[devWalletAddress][agentAddress] = 0;
