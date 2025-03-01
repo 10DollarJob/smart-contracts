@@ -1,0 +1,16 @@
+{
+	"solidity.packageDefaultDependenciesContractsDirectory": "",
+	"solidity.packageDefaultDependenciesDirectory": "node_modules",
+	"eslint.autoFixOnSave": true,
+	"eslint.validate": [
+		"javascript",
+		{
+			"language": "typescript",
+			"autoFix": true
+		}
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"solidity.compileUsingRemoteVersion": "v0.8.24+commit.e11b9ed9"
+}
