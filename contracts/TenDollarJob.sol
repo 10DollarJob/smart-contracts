@@ -41,7 +41,8 @@ contract TenDollarJob is Initializable {
 	function createAgent(
 		address devAddress,
 		address agentAddress
-	) public onlyOwner {
+	) public {
+		require(address(msg.sender) == devAddress, "illegal access");
 		require(
 			agentAddressToDevAddress[agentAddress] == address(0),
 			"Agent already exists"
@@ -74,6 +75,15 @@ contract TenDollarJob is Initializable {
 		return devToAgnetAddressToBalance[devAddress][agentAddress];
 	}
 
+	function withDrawAgentFunds (address agentAddress) public {
+		uint256 agentBalance =  balanceOfAgent(agentAddress);
+		require(agentBalance > 0, "No funds to withdraw");
+		address devWalletAddress = agentAddressToDevAddress[agentAddress];
+		devToAgnetAddressToBalance[devWalletAddress][agentAddress] = 0;
+		IERC20(usdcAddress).transfer(devWalletAddress, agentBalance);
+	}
+
+	// incase of emergency, protect users funds
 	function emergencyWithdraw(address to, uint256 amount) public onlyOwner {
 		require(to != address(0), "Invalid address");
 		IERC20(usdcAddress).transfer(to, amount);
